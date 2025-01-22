@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { MdArrowOutward } from "react-icons/md";
 
 const AirdropSections = () => {
   return (
@@ -20,7 +19,7 @@ const AirdropSections = () => {
           </p>
 
           {/* Panda Image */}
-          <div className="relative md:mt-6">
+          <div className="relative md:mt-44">
             <Image
               src="/Images/liwu.png"
               alt="LiWU Panda"
@@ -48,11 +47,13 @@ const AirdropSections = () => {
             <br />
             更是一场慷慨和社区的运动。
           </p>
-          <div className="flex justify-end">
-            <button className="inline-flex items-center border border-black text-black bg-white px-4 py-2 text-sm font-bold cursor-pointer hover:bg-gray-100 transition duration-300 ease-in-out">
-              <span>Read More</span>
-              <MdArrowOutward className="ml-2 w-5 h-5" />
+          
+          <div className=" pt-14 pr-40">
+          <div className="flex justify-center pr-96 h-20 w-50">
+            <button className="inline-flex rounded-lg items-center border border-black text-black bg-white px-4 py-2 text-sm font-bold cursor-pointer hover:bg-blue-200 hover:text-black transition-colors  duration-300 easin-out">
+              CLAIM TOKENS &#x1FA99;
             </button>
+          </div>
           </div>
         </div>
       </div>
