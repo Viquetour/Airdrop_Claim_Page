@@ -2,15 +2,17 @@ import Hero from "@/components/Home/Hero/Hero";
 import AirdropSections from "./AirdropSections/AirdropSections";
 import FloatingBox from "./Hero/FloatingBox";
 import Footer from "./Footer/Footer";
+import { ThirdwebProvider } from "thirdweb/react";
 const Home = () => {
   return (
-    <div className="overflow-hidden">
-      <Hero />
-      <FloatingBox />
-      <AirdropSections />
-      <Footer />
-      
-    </div>
+    <ThirdwebProvider>
+      <div className="overflow-hidden">
+        <Hero />
+        <FloatingBox />
+        <AirdropSections />
+        <Footer />
+      </div>
+    </ThirdwebProvider>
   );
-}
-export default Home
+};
+export default Home;
