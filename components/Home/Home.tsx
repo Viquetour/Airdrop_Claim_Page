@@ -6,10 +6,10 @@ import { ThirdwebProvider } from "thirdweb/react";
 const Home = () => {
   return (
     <ThirdwebProvider>
-      <div className="overflow-hidden">
+      <div className="w-full min-h-screen overflow-hidden flex flex-col">
         <Hero />
-        <FloatingBox />
         <AirdropSections />
+        <FloatingBox />
         <Footer />
       </div>
     </ThirdwebProvider>

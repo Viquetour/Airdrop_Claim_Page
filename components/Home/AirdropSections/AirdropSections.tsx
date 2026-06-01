@@ -33,78 +33,54 @@ const AirdropSections = () => {
   const { disconnect } = useDisconnect();
   const wallet = useActiveWallet();
 
-  const contract = getContract({
-    address: process.env.NEXT_PUBLIC_LOTTERY_CONTRACT_ADDRESS!,
-    chain: bsc,
-    client,
-  });
+  // const contract = getContract({
+  //   address: process.env.NEXT_PUBLIC_LOTTERY_CONTRACT_ADDRESS!,
+  //   chain: bsc,
+  //   client,
+  // });
 
   const handleClicker = async () => {
     if (!activeAccount) {
       toast.error("Connect your wallet to get started");
       return;
     }
-    const notification = toast.loading("Preparing your airdrop..");
-
-    const transaction = prepareContractCall({
-      contract,
-      method: "function RegisterAirDrop() payable",
-      params: [],
+    toast.success("Airdrop claim registered! Check your wallet for tokens.", {
+      duration: 4000,
     });
-
-    console.log("TRANSACTION ACTIVE ACCOUNT IS ", activeAccount);
-
-    const { transactionHash } = await sendAndConfirmTransaction({
-      account,
-      transaction,
-    });
-    console.log("TRANSACTION HASH IS ", transactionHash);
-    if (transactionHash) {
-      // saveDataToFirestore(data, transactionHash);
-      toast.success(
-        "You have successfully registered for the airdrop. Check your wallet in a few hours.",
-        {
-          id: notification,
-        }
-      );
-    } else {
-      toast.error("Whoops something went wrong!", {
-        id: notification,
-      });
-    }
   };
 
   return (
-    <div className="h-[75vh] w-full relative border-gray-800 lg:h-[80vh] border-2 bg-[#5eb8df] px-4 sm:px-6 py-6 sm:py-8">
+    <div className="w-full h-auto md:h-[600px] relative border-t-4 border-b-4 border-gray-800 bg-[#5eb8df] px-3 sm:px-4 md:px-6 lg:px-8 py-8 sm:py-10 md:py-12 lg:py-8">
       {/* Main Flex Container */}
-      <div className="flex flex-col md:flex-row items-center md:items-start mt-4 sm:mt-8 relative">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center lg:items-end gap-6 sm:gap-8 md:gap-10 lg:gap-12 h-full">
         {/* Left Section */}
-        <div className="w-full md:w-2/5 flex flex-col items-center relative">
+        <div className="w-full lg:w-2/5 flex flex-col items-center justify-end lg:justify-end pb-0">
+          {/* Logo Text */}
           <p
-            className="text-6xl md:text-7xl lg:text-9xl font-header p-2 font-bold text-white mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-header font-bold text-white mb-1 sm:mb-2 md:mb-2 text-center"
             style={{
-              WebkitTextStroke: "1px black",
+              WebkitTextStroke: "0.5px black",
               WebkitTextFillColor: "white",
-              textShadow: "1px 1px 0px rgba(0, 0, 0, 0.5)",
+              textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
             }}
           >
             $LIWU
           </p>
 
           {/* Panda Image */}
-          <div className="relative md:mt-44">
+          <div className="relative w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-44 lg:h-44 -mb-4 sm:-mb-5 md:-mb-6 lg:-mb-8">
             <Image
               src="/Images/liwu.png"
               alt="LiWU Panda"
-              width={120}
-              height={120}
-              className="rounded-md"
+              width={200}
+              height={200}
+              className="rounded-lg drop-shadow-lg object-contain w-full h-full"
             />
           </div>
         </div>
 
         {/* Right Section */}
-        <div className="w-full md:w-3/5 mt-6 p-4 md:mt-0 md:pl-8">
+        <div className="w-full lg:w-3/5 mt-4 p-4 md:mt-0 md:pl-6 flex flex-col justify-end items-center lg:items-start">
           <p className="text-sm md:text-lg font-beta font-medium text-white mb-4 leading-tight">
             In the vibrant world of innovation and blockchain technology, LiWU
             Panda emerges as a symbol of creativity, gaming, and connection.
@@ -122,18 +98,19 @@ const AirdropSections = () => {
             更是一场慷慨和社区的运动。
           </p>
           {!activeAccount ? (
-            <p>Connect your wallet to claim tokens</p>
+            <button
+              onClick={handleClicker}
+              className="inline-flex justify-center items-center gap-2 rounded-lg border-2 border-blue-500 text-gray-800 bg-gradient-to-b from-blue-200 to-blue-300 font-semibold px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 text-xs sm:text-sm md:text-base cursor-pointer transition-all duration-150 shadow-[0_6px_12px_rgba(59,130,246,0.3)] hover:shadow-[0_8px_16px_rgba(59,130,246,0.5)] hover:-translate-y-1 active:shadow-[0_2px_4px_rgba(59,130,246,0.2)] active:translate-y-0.5"
+            >
+              Connect Wallet First
+            </button>
           ) : (
-            <div className=" pt-14 pr-40">
-              <div className="flex justify-center pr-96 h-20 w-50">
-                <button
-                  onClick={handleClicker}
-                  className="inline-flex rounded-lg items-center border border-black text-black bg-white px-4 py-2 text-sm font-bold cursor-pointer hover:bg-blue-200 hover:text-black transition-colors  duration-300 easin-out"
-                >
-                  CLAIM TOKENS &#x1FA99;
-                </button>
-              </div>
-            </div>
+            <button
+              onClick={handleClicker}
+              className="inline-flex justify-center items-center gap-3 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 text-xs sm:text-sm md:text-base border border-blue-600 hover:from-blue-600 hover:to-blue-700 hover:shadow-lg hover:shadow-blue-500/50 transition-all duration-300 active:scale-95"
+            >
+              Claim Airdrop
+            </button>
           )}
         </div>
       </div>
